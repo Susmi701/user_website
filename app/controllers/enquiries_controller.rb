@@ -5,8 +5,9 @@ class EnquiriesController < ApplicationController
   end
 
   def show
-    @enquiry= Enquiry.find(params[:id])
+    @enquiry = Enquiry.find(params[:id])
   end
+  
 
   def new
     @enquiry=Enquiry.new
