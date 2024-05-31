@@ -1,7 +1,7 @@
 class EnquiriesController < ApplicationController
   
   def index
-    @enquiries = Enquiry.all
+    @enquiries = Enquiry.paginate(page: params[:page], per_page: 10)
   end
 
   def show

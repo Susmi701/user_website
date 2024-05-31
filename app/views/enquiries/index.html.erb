@@ -1,4 +1,8 @@
 <%= render 'shared/user_nav' %>
+
+<div class="flickr_pagination mt-4">
+    <%= will_paginate @enquiries, :container => false %>
+</div>
 <div class="container">
     <div class="row mt-5">
         <div class="col-md-11">
@@ -16,7 +20,7 @@
                             <td><%= enquiry.name %></td>
                             <td><%= enquiry.email %></td>
                             <td>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#messageModal<%= enquiry.id %>">View Message</button>
+                                <button class="btn  btn-info" data-bs-toggle="modal" data-bs-target="#messageModal<%= enquiry.id %>">View Message</button>
                             </td>
                         </tr>
                     <% end %>
@@ -28,14 +32,19 @@
 
 <% @enquiries.each do |enquiry| %>
     <div class="modal fade" id="messageModal<%= enquiry.id %>" tabindex="-1" aria-labelledby="messageModalLabel<%= enquiry.id %>" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="messageModalLabel<%= enquiry.id %>"><%= enquiry.name %></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <%= enquiry.message %>
+                    <%= simple_format(enquiry.message) %>
+                </div>
+                <div class="modal-footer ">
+                    <div class="w-100 text-center fw-italic">
+                        <small >send <%= time_ago_in_words(enquiry.created_at) %> ago</small>
+                    </div>   
                 </div>
             </div>
         </div>

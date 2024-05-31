@@ -1,29 +1,29 @@
 <%= render 'shared/public_nav' %>
 <div class="container ">
     <div class="col-10 mx-auto ">
-        <div class="row justify-content-center mt-5 bg-light">
-            
+        <div class=" justify-content-center mt-5 bg-white">           
             <%= form_with  scope: :enquiry,url: enquiries_path ,local: true,class:"custom-bg shadow mb-3 rounded" do |f| %>
-                <h3 class="text-center m-4">Drop Us a Message</h3>
+                <h3 class="text-center m-4 pt-4">Drop Us a Message</h3>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group  p-4 row">
-                                <%= f.text_field :name, class: "form-control shadow rounded ",placeholder: "Your Name *" %>
+                                <%= f.text_field :name, class: "form-control rounded ",placeholder: "Your Name *" %>
                             </div>
                             <div class="form-group p-4 row">
-                                <%= f.text_field :email, class: "form-control shadow rounded ",placeholder: "Your Email *" %>
+                                <%= f.text_field :email, class: "form-control  rounded ",placeholder: "Your Email *" %>
                             </div>
                             <div class="form-group p-4 row">
-                                <%= f.text_field :subject, class: "form-control shadow rounded ",placeholder: "Subject" %>
-                            </div>
-                            <div class=" col py-4 text-center">
-                                <%= f.submit "Send Message", class: "btn btn-outline-success btn-lg my-4" %>                            
-                            </div>
+                                <%= f.text_field :subject, class: "form-control  rounded ",placeholder: "Subject" %>
+                            </div>                           
                         </div>
                         <div class="col-md-6">
                             <div class="form-group p-4 row">
-                            <%= f.text_area :message, class: "form-control shadow mb-3  rounded ",  rows:"9",placeholder: "Message..." %>
+                            <%= f.text_area :message, size: "70x8" , class: "form-control  mb-3  rounded ",placeholder: "Message..." %>
+                            </div>
                         </div>
+                        <div class=" col py-4 text-center">
+                             <%= f.submit "Send Message", class: "btn btn-outline-success btn-lg my-4" %>                            
+                         </div>
                     </div>
                 </div>
             <%end%>
