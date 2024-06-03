@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy ]
+  before_action :require_user,only: [:edit,:update,:destroy]
+  before_action :require_same_user,only: [:destroy,:edit,:update]
 
   def index
     @users = User.paginate(page: params[:page], per_page: 10)
@@ -13,16 +15,17 @@ class UsersController < ApplicationController
   end
 
   def edit    
-  end
-
-  def login_new
-  end
+  end 
 
   def create  
     @user = User.new(user_params)
     if @user.save
       flash[:notice] = "User was created successfully"
-      redirect_to login_path
+      if !logged_in
+        redirect_to login_path
+      else
+        redirect_to users_path
+      end
     else
       render :new, status: :unprocessable_entity
     end
@@ -35,23 +38,14 @@ class UsersController < ApplicationController
    else
     render :edit, status: :unprocessable_entity
    end
-end
-
-def destroy
-  @user.destroy
-  redirect_to users_path
-end
-  
-def login
-  login_params= params.permit(:email, :password)
-  @user =User.find_by(email: login_params[:email])
-  if @user && @user.password == login_params[:password]
-    redirect_to users_path
-  else
-    flash[:notice] = "Login Failed"
-    render :login_new, status: :unprocessable_entity
   end
-end
+
+  def destroy
+    @user.destroy
+    session[:current_user_id]=nil if @user == current_user
+    redirect_to users_path
+  end
+
 
   private
   
@@ -62,4 +56,12 @@ end
   def set_user
     @user= User.find(params[:id])
   end
+
+  def require_same_user
+    if current_user != @user
+      flash[:notice] = "You cannot edit or delete this user"
+      redirect_to users_path
+    end
+  end
+
 end

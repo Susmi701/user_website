@@ -1,4 +1,4 @@
-<%= render 'shared/user_nav' %>
+<h2 class="text-center m-4 pt-4"> Registered Users Directory</h2>
 <div class="flickr_pagination mt-4">
     <%= will_paginate @users, :container => false %>
 </div>
@@ -18,11 +18,14 @@
                     <tr>
                         <td><%= "#{user.first_name}  " " #{user.last_name}" %></td>
                         <td><%= user.email %></td>
-                        <td><a  href="<%= edit_user_path(user) %>"><img src="https://cdn3.iconfinder.com/data/icons/feather-5/24/edit-512.png" alt="" style="height: 20px; width: 20px;"></a>
+                        <td>
                             <a  href="<%= user_path(user) %>"><img src="https://static.thenounproject.com/png/2040082-200.png" alt="" style="height: 27px; width: 27px;"></a>
-                            <%= link_to user_path(user), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
-                            <img src="https://static-00.iconduck.com/assets.00/delete-icon-1864x2048-bp2i0gor.png" alt="" style="height: 22px; width: 22px;">
-                            <% end %>
+                            <% if current_user == user %>
+                               - <a  href="<%= edit_user_path(user) %>"><img src="https://cdn3.iconfinder.com/data/icons/feather-5/24/edit-512.png" alt="" style="height: 20px; width: 20px;"></a>
+                                - <%= link_to user_path(user), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+                                <img src="https://static-00.iconduck.com/assets.00/delete-icon-1864x2048-bp2i0gor.png" alt="" style="height: 22px; width: 22px;">
+                                <% end %>
+                            <%end%>
                         </td>
                     </tr>
                     <% end %>

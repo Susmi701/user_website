@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <%= link_to 'User', users_path,class: "navbar-brand logo px-4" %>
+    <%= link_to pages_index_path, class: "navbar-brand  p-3" do %>
+  <%= image_tag("logo.png", alt: "Logo", width: "200", height: "30") %>
+<% end %>
        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -17,18 +19,17 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Profile
+           <%= "#{current_user.first_name } #{current_user.last_name}"%>
           </a>
           <ul class="dropdown-menu ">
-            <li> <%= link_to "View ", new_user_path, class: "dropdown-item" %></li>
-            <li> <%= link_to "Edit ", new_user_path, class: "dropdown-item" %></li>
-             <li><hr class="dropdown-divider"></li>
-            <li> <%= link_to "Delete", users_path, class: "dropdown-item text-danger" %></li>
+            <li> <%= link_to "View ", user_path(current_user), class: "dropdown-item" %></li>
+            <li> <%= link_to "Edit ", edit_user_path(current_user), class: "dropdown-item" %></li>
+            <li><hr class="dropdown-divider"></li>
+            <li> <%= link_to "Delete", user_path(current_user), class: "dropdown-item text-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete your profile?" }  %></li>
           </ul>
         </li>
       </ul>
-           <%= link_to "Logout", new_user_path, class: " btn btn-outline-light mx-5 " %>
-            
+            <%= link_to "Logout", logout_path, class: "btn btn-outline-light mx-5", data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to logout?" } %>
     </div>
   </div>
 </nav>

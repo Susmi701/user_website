@@ -12,6 +12,11 @@
   </head>
 
   <body class="d-flex flex-column">
+    <% if logged_in%>
+     <%= render "shared/user_nav" %>
+    <%else%>
+     <%= render "shared/public_nav" %>
+    <%end%>
     <div id="page-content">
       <%= render 'layouts/messages' %>
       <%= yield %>

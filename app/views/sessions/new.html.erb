@@ -1,8 +1,7 @@
-<%= render 'shared/public_nav' %>
-  <div class="container ">
+<div class="container ">
     <div class="col-4 mx-auto pt-5 ">
-        <div class="row justify-content-center rounded  mt-5 bg-white shadow ">
-             <%= form_with url: login_path do |f| %>
+        <div class="row justify-content-center rounded  mt-5  ">
+            <%= form_with(scope: :session, url: login_path, class:"custom-bg bg-white shadow mb-3 rounded",local: true ) do |f| %>
              <h3 class="text-center m-4">Login</h3>
                 <div class="mb-4 col">
                      
@@ -25,4 +24,5 @@
             <% end %>
         </div>
     </div>
-  </div>
+</div>  
+

@@ -1,2 +1,35 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="text-center ">User Profile</h2>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <img src="https://via.placeholder.com/150" alt="User Avatar" class="img-fluid rounded-circle">
+            </div>
+            <div class="col-md-8">
+              <h4><%= "#{current_user.first_name} #{current_user.last_name}"%></h4>
+              <p>Email:<%=current_user.email%></p>
+              <p>Location: New York, USA</p>
+              <p>Bio: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec fringilla massa. Ut eu eros est.</p>
+            </div>
+             <%if (current_user == @user )%>
+            <div class="text-center m-4">
+            <%= link_to 'Edit  Profile ', edit_user_path(@user),class: "btn btn-outline-primary " %> 
+            <%= link_to "Delete Profile", user_path(@user), class: "btn btn-outline-danger ", method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete  account?" } %>
+            </div>
+            <%end%>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="w-100 text-center fw-italic">
+                        <small >joined <%= time_ago_in_words(@user.created_at) %> ago</small>
+            </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
