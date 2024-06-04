@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     session[:current_user_id]=@user.id
     redirect_to users_path
   else
-    flash[:notice] = "Login Failed"
+    flash.now[:danger] = "Login Failed"
     render :new, status: :unprocessable_entity
   end
   end
@@ -19,4 +19,5 @@ class SessionsController < ApplicationController
     flash[:notice] = "You have successfully logged out."
     redirect_to login_path
   end
+  
 end
