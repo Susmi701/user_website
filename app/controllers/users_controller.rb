@@ -14,18 +14,14 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def edit    
+  def edit
   end 
 
   def create  
     @user = User.new(user_params)
     if @user.save
       flash[:notice] = "User was created successfully"
-      if !logged_in
-        redirect_to login_path
-      else
-        redirect_to users_path
-      end
+      redirect_to logged_in ? users_path : login_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -42,8 +38,12 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    session[:current_user_id]=nil if @user == current_user
-    redirect_to users_path
+    if @user == current_user
+      session[:current_user_id]=nil 
+      redirect_to root_path
+    else
+      redirect_to users_path
+    end
   end
 
 
