@@ -1,5 +1,7 @@
 class EnquiriesController < ApplicationController
-  
+  before_action :require_user,only: [:show,:index]
+  before_action :require_admin_user,only: [:show,:index]
+
   def index
     @enquiries = Enquiry.paginate(page: params[:page], per_page: 10)
   end
@@ -28,4 +30,11 @@ class EnquiriesController < ApplicationController
   def message_params
     params.require(:enquiry).permit(:name, :email,:subject, :message)
   end
+
+  def require_admin_user
+    if !current_user.admin?
+        flash[:alert]="Only Admin has access"
+        redirect_to users_path
+    end
+end
 end
