@@ -1,5 +1,42 @@
 <footer id="sticky-footer" class="flex-shrink-0 py-2  text-secondary">
 <div class="container text-center">
-  <small>Copyright &copy; <%= link_to "Susmi","https://in.linkedin.com/in/susmi-elsa-joy-731197211",class:"text-secondary" %></small>
+  <div class="row  py-4 justify-content-center ">
+  `<div class="col-12 col-lg-3 text-center text-lg-start mb-3 mb-lg-0">
+    <ul class="list-unstyled  d-block d-lg-flex ">
+  <% if !logged_in%>
+
+                        <li class="nav-item">
+                            <%= link_to "Home",root_path,class: "nav-link text-dark text-decoration-none me-lg-3" %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to "About Us",pages_about_us_path, class: "nav-link text-dark text-decoration-none me-lg-3"%>
+                        </li>
+                       
+                        <li class="nav-item">
+                            <%= link_to "SignUp",new_user_path,class: "nav-link text-dark text-decoration-none me-lg-3" %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to "Contact Us",new_enquiry_path, class: "nav-link text-dark text-decoration-none"%>
+                        </li>
+                    <%else%>
+                        <li class="nav-item">
+                            <%= link_to "Profile",user_path(current_user),class: "nav-link text-dark text-decoration-none me-lg-3" %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to "Contact Us",new_enquiry_path, class: "nav-link text-dark text-decoration-none me-lg-3"%>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to "See Users",users_path, class: "nav-link text-dark text-decoration-none me-lg-3"%>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to "About Us",pages_about_us_path, class: "nav-link text-dark text-decoration-none me-lg-3"%>
+                        </li>
+                    <%end%>
+                    </ul>
+                    
+  
+    </div>`
+<small>Copyright &copy; <%= link_to "Susmi","https://in.linkedin.com/in/susmi-elsa-joy-731197211",class:"text-secondary" %></small>
+</div>
 </div>
 </footer>
